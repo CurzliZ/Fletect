@@ -1,0 +1,28 @@
+# Flood Sentry: Core Dependencies
+# Tested on Windows 11 with Python 3.12 (.venv312)
+
+# Deep Learning & Tabular ML
+tensorflow>=2.16,<2.22
+keras>=3.0,<3.16
+xgboost>=2.0,<3.5
+scikit-learn>=1.5,<2.0
+pandas>=2.2,<4.0
+numpy>=1.26,<3.0
+joblib>=1.4,<2.0
+scipy>=1.13
+
+# Backend API & Server
+fastapi>=0.110,<1.0
+uvicorn>=0.30,<1.0
+pydantic>=2.7,<3.0
+python-multipart>=0.0.9
+
+# Operational Dashboard & Visualizations
+streamlit>=1.35,<2.0
+matplotlib>=3.8,<4.0
+altair>=5.0,<7.0
+
+# Testing & Client Libraries
+pytest>=8.0,<10.0
+requests>=2.31,<3.0
+httpx>=0.27,<1.0

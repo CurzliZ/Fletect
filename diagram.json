@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "author": "FLOOD SENTRY",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -33.7, "left": 331, "attrs": {} },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "sonar",
+      "top": -152.1,
+      "left": 178.3,
+      "attrs": { "distance": "34" }
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd",
+      "top": -51.2,
+      "left": 514.4,
+      "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "rain",
+      "top": 229.1,
+      "left": 527.8,
+      "attrs": { "value": "250" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "flow",
+      "top": 229.1,
+      "left": 115,
+      "attrs": { "value": "800" }
+    },
+    { "type": "wokwi-led", "id": "ledG", "top": 180, "left": 300, "attrs": { "color": "green" } },
+    { "type": "wokwi-led", "id": "ledY", "top": 180, "left": 360, "attrs": { "color": "yellow" } },
+    { "type": "wokwi-led", "id": "ledR", "top": 180, "left": 420, "attrs": { "color": "red" } },
+    { "type": "wokwi-buzzer", "id": "buzz", "top": 261.6, "left": 357, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "ack",
+      "top": 83,
+      "left": 163.2,
+      "attrs": { "color": "blue", "label": "ACK" }
+    },
+    { "type": "wokwi-resistor", "id": "rg", "top": 230, "left": 300, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "ry", "top": 230, "left": 360, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "rr", "top": 230, "left": 420, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    [ "sonar:VCC", "esp:VIN", "red", [] ],
+    [ "sonar:GND", "esp:GND.1", "black", [] ],
+    [ "sonar:TRIG", "esp:D5", "green", [] ],
+    [ "sonar:ECHO", "esp:D18", "blue", [] ],
+    [ "lcd:VCC", "esp:3V3", "red", [] ],
+    [ "lcd:GND", "esp:GND.1", "black", [] ],
+    [ "lcd:SDA", "esp:D21", "green", [] ],
+    [ "lcd:SCL", "esp:D22", "blue", [] ],
+    [ "rain:VCC", "esp:3V3", "red", [] ],
+    [ "rain:GND", "esp:GND.1", "black", [] ],
+    [ "rain:SIG", "esp:D34", "orange", [] ],
+    [ "flow:VCC", "esp:3V3", "red", [] ],
+    [ "flow:GND", "esp:GND.1", "black", [] ],
+    [ "flow:SIG", "esp:D35", "orange", [] ],
+    [ "esp:D25", "rg:1", "green", [] ],
+    [ "rg:2", "ledG:A", "green", [] ],
+    [ "ledG:C", "esp:GND.1", "black", [] ],
+    [ "esp:D26", "ry:1", "yellow", [] ],
+    [ "ry:2", "ledY:A", "yellow", [] ],
+    [ "ledY:C", "esp:GND.1", "black", [] ],
+    [ "esp:D27", "rr:1", "red", [] ],
+    [ "rr:2", "ledR:A", "red", [] ],
+    [ "ledR:C", "esp:GND.1", "black", [] ],
+    [ "buzz:1", "esp:D14", "purple", [] ],
+    [ "buzz:2", "esp:GND.1", "black", [] ],
+    [ "ack:1.l", "esp:D13", "blue", [] ],
+    [ "ack:2.l", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}

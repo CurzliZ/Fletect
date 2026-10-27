@@ -1,0 +1,268 @@
+{
+  "metadata": {
+    "prediction_target": "Simulated flood risk 3 hours ahead (0=Low, 1=Medium, 2=High)",
+    "dataset_origin": "flood_risk_dnn_synthetic_120k.csv",
+    "disclaimer": "Trained on synthetic dataset calibrated to CWC rainfall empirical distribution. Research/decision-support only.",
+    "test_sample_count": 17940,
+    "feature_set": [
+      "rainfall_mm_h",
+      "rainfall_3h_mm",
+      "rainfall_6h_mm",
+      "rainfall_24h_mm",
+      "water_level_cm",
+      "water_level_pct",
+      "water_level_change_cm_h",
+      "soil_saturation_pct",
+      "channel_capacity_cm",
+      "hour_of_day",
+      "month"
+    ],
+    "classes": {
+      "0": "Low",
+      "1": "Medium",
+      "2": "High"
+    }
+  },
+  "model_comparison": {
+    "Rule-Based Baseline": {
+      "accuracy": 0.879933110367893,
+      "macro_f1": 0.8167493336591835,
+      "high_risk_recall": 0.8311926605504587,
+      "high_risk_fn_rate": 0.1688,
+      "latency_ms": 0.0005
+    },
+    "XGBoost Classifier": {
+      "accuracy": 0.9270345596432553,
+      "macro_f1": 0.9020927429399231,
+      "high_risk_recall": 0.9371559633027523,
+      "high_risk_fn_rate": 0.0628,
+      "latency_ms": 0.0009
+    },
+    "Deep Neural Network (DNN)": {
+      "accuracy": 0.9235785953177258,
+      "macro_f1": 0.8952389488309048,
+      "high_risk_recall": 0.9270642201834862,
+      "high_risk_fn_rate": 0.0729,
+      "latency_ms": 0.0315
+    },
+    "Sequential LSTM": {
+      "accuracy": 0.9266816143497758,
+      "macro_f1": 0.90010812242519,
+      "high_risk_recall": 0.9317972350230415,
+      "high_risk_fn_rate": 0.0682,
+      "latency_ms": 0.0576
+    }
+  },
+  "detailed_results": {
+    "rule_baseline": {
+      "model_name": "Hydrological Rule-Based Baseline",
+      "accuracy": 0.879933110367893,
+      "macro_f1": 0.8167493336591835,
+      "weighted_f1": 0.8799488814931293,
+      "confusion_matrix": [
+        [
+          11748,
+          719,
+          0
+        ],
+        [
+          706,
+          2226,
+          361
+        ],
+        [
+          15,
+          353,
+          1812
+        ]
+      ],
+      "per_class_metrics": {
+        "Low": {
+          "precision": 0.9421765979629481,
+          "recall": 0.9423277452474533,
+          "f1": 0.9422521655437921,
+          "support": 12467
+        },
+        "Medium": {
+          "precision": 0.6749545178896301,
+          "recall": 0.6759793501366536,
+          "f1": 0.6754665452890305,
+          "support": 3293
+        },
+        "High": {
+          "precision": 0.8338702254947078,
+          "recall": 0.8311926605504587,
+          "f1": 0.8325292901447278,
+          "support": 2180
+        }
+      },
+      "high_risk_false_negative_analysis": {
+        "total_high_risk_actual": 2180,
+        "correctly_identified_high": 1812,
+        "dangerously_missed_as_low": 15,
+        "missed_as_medium": 353,
+        "high_risk_false_negative_rate": 0.1688
+      },
+      "inference_latency_ms_per_sample": 0.0005,
+      "classification_report_text": "              precision    recall  f1-score   support\n\n         Low     0.9422    0.9423    0.9423     12467\n      Medium     0.6750    0.6760    0.6755      3293\n        High     0.8339    0.8312    0.8325      2180\n\n    accuracy                         0.8799     17940\n   macro avg     0.8170    0.8165    0.8167     17940\nweighted avg     0.8800    0.8799    0.8799     17940\n"
+    },
+    "xgboost": {
+      "model_name": "XGBoost Classifier",
+      "accuracy": 0.9270345596432553,
+      "macro_f1": 0.9020927429399231,
+      "weighted_f1": 0.9268347161674925,
+      "confusion_matrix": [
+        [
+          11964,
+          503,
+          0
+        ],
+        [
+          582,
+          2624,
+          87
+        ],
+        [
+          15,
+          122,
+          2043
+        ]
+      ],
+      "per_class_metrics": {
+        "Low": {
+          "precision": 0.9524719369476953,
+          "recall": 0.9596534852009304,
+          "f1": 0.9560492248681477,
+          "support": 12467
+        },
+        "Medium": {
+          "precision": 0.8076331178824253,
+          "recall": 0.7968417856058305,
+          "f1": 0.8022011617242434,
+          "support": 3293
+        },
+        "High": {
+          "precision": 0.9591549295774648,
+          "recall": 0.9371559633027523,
+          "f1": 0.9480278422273782,
+          "support": 2180
+        }
+      },
+      "high_risk_false_negative_analysis": {
+        "total_high_risk_actual": 2180,
+        "correctly_identified_high": 2043,
+        "dangerously_missed_as_low": 15,
+        "missed_as_medium": 122,
+        "high_risk_false_negative_rate": 0.0628
+      },
+      "inference_latency_ms_per_sample": 0.0009,
+      "classification_report_text": "              precision    recall  f1-score   support\n\n         Low     0.9525    0.9597    0.9560     12467\n      Medium     0.8076    0.7968    0.8022      3293\n        High     0.9592    0.9372    0.9480      2180\n\n    accuracy                         0.9270     17940\n   macro avg     0.9064    0.8979    0.9021     17940\nweighted avg     0.9267    0.9270    0.9268     17940\n"
+    },
+    "dnn": {
+      "model_name": "Deep Neural Network (DNN)",
+      "accuracy": 0.9235785953177258,
+      "macro_f1": 0.8952389488309048,
+      "weighted_f1": 0.9233689838406243,
+      "confusion_matrix": [
+        [
+          11953,
+          514,
+          0
+        ],
+        [
+          587,
+          2595,
+          111
+        ],
+        [
+          16,
+          143,
+          2021
+        ]
+      ],
+      "per_class_metrics": {
+        "Low": {
+          "precision": 0.9519751513220771,
+          "recall": 0.9587711558514478,
+          "f1": 0.9553610678176078,
+          "support": 12467
+        },
+        "Medium": {
+          "precision": 0.7979704797047971,
+          "recall": 0.7880352262374735,
+          "f1": 0.7929717341482048,
+          "support": 3293
+        },
+        "High": {
+          "precision": 0.9479362101313321,
+          "recall": 0.9270642201834862,
+          "f1": 0.9373840445269017,
+          "support": 2180
+        }
+      },
+      "high_risk_false_negative_analysis": {
+        "total_high_risk_actual": 2180,
+        "correctly_identified_high": 2021,
+        "dangerously_missed_as_low": 16,
+        "missed_as_medium": 143,
+        "high_risk_false_negative_rate": 0.0729
+      },
+      "inference_latency_ms_per_sample": 0.0315,
+      "classification_report_text": "              precision    recall  f1-score   support\n\n         Low     0.9520    0.9588    0.9554     12467\n      Medium     0.7980    0.7880    0.7930      3293\n        High     0.9479    0.9271    0.9374      2180\n\n    accuracy                         0.9236     17940\n   macro avg     0.8993    0.8913    0.8952     17940\nweighted avg     0.9232    0.9236    0.9234     17940\n",
+      "epochs_trained": 16
+    },
+    "lstm": {
+      "model_name": "Sequential Recurrent Network (LSTM)",
+      "accuracy": 0.9266816143497758,
+      "macro_f1": 0.90010812242519,
+      "weighted_f1": 0.9263283734406663,
+      "confusion_matrix": [
+        [
+          11926,
+          476,
+          0
+        ],
+        [
+          591,
+          2584,
+          93
+        ],
+        [
+          16,
+          132,
+          2022
+        ]
+      ],
+      "per_class_metrics": {
+        "Low": {
+          "precision": 0.951567860847363,
+          "recall": 0.9616190936945654,
+          "f1": 0.9565670743934229,
+          "support": 12402
+        },
+        "Medium": {
+          "precision": 0.8095238095238095,
+          "recall": 0.7906976744186046,
+          "f1": 0.8,
+          "support": 3268
+        },
+        "High": {
+          "precision": 0.9560283687943263,
+          "recall": 0.9317972350230415,
+          "f1": 0.943757292882147,
+          "support": 2170
+        }
+      },
+      "high_risk_false_negative_analysis": {
+        "total_high_risk_actual": 2170,
+        "correctly_identified_high": 2022,
+        "dangerously_missed_as_low": 16,
+        "missed_as_medium": 132,
+        "high_risk_false_negative_rate": 0.0682
+      },
+      "inference_latency_ms_per_sample": 0.0576,
+      "classification_report_text": "              precision    recall  f1-score   support\n\n         Low     0.9516    0.9616    0.9566     12402\n      Medium     0.8095    0.7907    0.8000      3268\n        High     0.9560    0.9318    0.9438      2170\n\n    accuracy                         0.9267     17840\n   macro avg     0.9057    0.8947    0.9001     17840\nweighted avg     0.9261    0.9267    0.9263     17840\n",
+      "epochs_trained": 23
+    }
+  }
+}

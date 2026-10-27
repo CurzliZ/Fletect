@@ -1,0 +1,53 @@
+{
+  "warning": "Synthetic-only evaluation; not evidence of real-world flood prediction accuracy.",
+  "prediction_target": "risk class 3 hours ahead",
+  "dataset": "flood_risk_dnn_synthetic_120k.csv",
+  "rows": {
+    "train": 83940,
+    "validation": 17940,
+    "test": 17940
+  },
+  "features": [
+    "rainfall_mm_h",
+    "rainfall_3h_mm",
+    "rainfall_6h_mm",
+    "rainfall_24h_mm",
+    "water_level_cm",
+    "water_level_pct",
+    "water_level_change_cm_h",
+    "soil_saturation_pct",
+    "channel_capacity_cm",
+    "hour_of_day",
+    "month"
+  ],
+  "class_mapping": {
+    "0": "Low",
+    "1": "Medium",
+    "2": "High"
+  },
+  "class_weights": {
+    "0": 0.44393672553032826,
+    "1": 2.189529697159402,
+    "2": 3.4398819768871403
+  },
+  "test_accuracy": 0.9235785953177258,
+  "confusion_matrix_rows_true_cols_predicted": [
+    [
+      11953,
+      514,
+      0
+    ],
+    [
+      587,
+      2595,
+      111
+    ],
+    [
+      16,
+      143,
+      2021
+    ]
+  ],
+  "classification_report": "              precision    recall  f1-score   support\n\n         Low     0.9520    0.9588    0.9554     12467\n      Medium     0.7980    0.7880    0.7930      3293\n        High     0.9479    0.9271    0.9374      2180\n\n    accuracy                         0.9236     17940\n   macro avg     0.8993    0.8913    0.8952     17940\nweighted avg     0.9232    0.9236    0.9234     17940\n",
+  "epochs_ran": 16
+}

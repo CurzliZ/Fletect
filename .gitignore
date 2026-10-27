@@ -1,0 +1,37 @@
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual Environments
+.venv/
+.venv*/
+venv/
+ENV/
+
+# Local Environment Variables & Secrets
+.env
+.env.local
+
+# Databases & Runtime Data
+data/*.db
+data/*.db-journal
+data/*.sqlite3
+
+# IDE and Editor Cache
+.vscode/
+.idea/
+.qodo/
+*.swp
+*.swo
+
+# OS Artifacts
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Logs
+*.log
